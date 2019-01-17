@@ -45,10 +45,12 @@ module('Acceptance | list rentals', function(hooks) {
     assert.equal(this.element.querySelectorAll('.listing').length, 3, 'should display 3 listings');
   });
 
-  test('should filter the list of rentals by city.', async function (assert) {
-  });
-
   test('should show details for a selected rental', async function (assert) {
+    await visit('/rentals');
+    await click(".grand-old-mansion");
+    assert.equal(currentURL(), '/rentals/grand-old-mansion', "should navigate to show route");
+    assert.ok(this.element.querySelector('.show-listing h2').textContent.includes("Grand Old Mansion"), 'should list rental title');
+    assert.ok(this.element.querySelector('.show-listing .description'), 'should list a description of the property');
   });
 
   test('should filter the list of rentals by city', async function(assert) {
